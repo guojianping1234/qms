@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/myspringbt/demo/groovy/FileUtil.groovy" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myspringbt/demo/util/SpringUtil.java" charset="UTF-8" />
   </component>
 </project>
