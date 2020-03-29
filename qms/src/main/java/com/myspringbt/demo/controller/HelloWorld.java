@@ -1,10 +1,15 @@
 package com.myspringbt.demo.controller;
 
+import com.myspringbt.demo.service.CommonService;
+import com.myspringbt.demo.util.SpringUtil;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RestController
@@ -13,9 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorld {
     @GetMapping("helloworld")
     public String hellows() {
-        new String();
-        return "hello world";
+        String dev = SpringUtil.getActiveProfile();
+        CommonService commonService = SpringUtil.getBean(CommonService.class);
+        List<Map<String, Object>> a = commonService.findAllMessage();
+        Boolean c = SpringUtil.iswindow();
+        Boolean d = SpringUtil.ifDeveLopmentMode();
+
+        String name = dev + c + d + a.toString();
+        return name;
     }
 
-    
+
 }
