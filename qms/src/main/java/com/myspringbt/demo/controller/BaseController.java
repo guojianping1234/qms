@@ -2,6 +2,8 @@ package com.myspringbt.demo.controller;
 
 import com.alibaba.druid.util.StringUtils;
 import com.myspringbt.demo.util.RedisUtils;
+import org.apache.catalina.connector.Request;
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +81,38 @@ public class BaseController {
         }
         return ip;
     }
+
+
+    /**
+     * 获取request
+     */
+    protected HttpServletRequest getRequest() {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (requestAttributes != null) {
+            return requestAttributes.getRequest();
+        }
+
+        return new Request(null);
+    }
+
+    /*
+
+    获取responese
+     */
+    protected HttpServletRequest getResponse() {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (requestAttributes != null) {
+            return (HttpServletRequest) requestAttributes.getResponse();
+        }
+        return (HttpServletRequest) new Response(0);
+    }
+
+    /**
+     * 获取语言
+     */
+//    protected String getLangue() {
+//        LocalResolver localResolver = SpringUtil.getBean(LocalResolver.class);
+//    }
+
 
 }
