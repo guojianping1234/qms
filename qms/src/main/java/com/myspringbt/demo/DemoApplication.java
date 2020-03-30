@@ -1,8 +1,11 @@
 package com.myspringbt.demo;
 
+import javafx.application.Application;
+import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -18,7 +21,25 @@ import java.util.Locale;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        ApplicationContext applicationContext = null;
+        try {
+            SpringApplication sp = new SpringApplication(DemoApplication.class);
+            applicationContext = sp.run();
+            //
+        } catch (Throwable e) {
+            if (applicationContext == null) {
+                return;
+            }
+
+            SpringApplication.exit(applicationContext, new ExitCodeGenerator() {
+                @Override
+                public int getExitCode() {
+                    return 0;
+                }
+            });
+
+        }
+
     }
 
 
