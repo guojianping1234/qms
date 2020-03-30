@@ -2,15 +2,20 @@ package com.myspringbt.demo.controller;
 
 import com.alibaba.druid.util.StringUtils;
 import com.myspringbt.demo.util.RedisUtils;
+import com.myspringbt.demo.util.SpringUtil;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
+import org.apache.tomcat.util.descriptor.LocalResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
+import java.util.Objects;
 
 public class BaseController {
     public Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -110,9 +115,11 @@ public class BaseController {
     /**
      * 获取语言
      */
-//    protected String getLangue() {
-//        LocalResolver localResolver = SpringUtil.getBean(LocalResolver.class);
-//    }
+    protected String getLangue() {
+        LocaleResolver localResolver = (LocaleResolver) SpringUtil.getBean(LocalResolver.class);
+        Locale locale = Objects.requireNonNull(localResolver.resolveLocale(getRequest()));
+        return locale.getLanguage();
+    }
 
 
 }
