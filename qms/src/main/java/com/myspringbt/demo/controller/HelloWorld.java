@@ -1,5 +1,6 @@
 package com.myspringbt.demo.controller;
 
+import com.myspringbt.demo.annotation.AuditLog;
 import com.myspringbt.demo.service.CommonService;
 import com.myspringbt.demo.util.SpringUtil;
 import io.swagger.annotations.Api;
@@ -16,6 +17,7 @@ import java.util.Map;
 @RequestMapping("v1/")
 @Api("HelloWorldController")
 public class HelloWorld {
+    @AuditLog(descrption = "test")
     @GetMapping("helloworld")
     public String hellows() {
         String dev = SpringUtil.getActiveProfile();
